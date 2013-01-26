@@ -1,0 +1,24 @@
+%section#intro
+  = image_tag "logo.png"
+
+  %h3 Headline
+
+  %p
+    = image_tag "image.gif"
+    %br
+    = File.mtime(__FILE__)
+
+%section
+  %section
+    %blockquote
+      Quotes
+
+  %section
+    its html, so try embedding iframes, google trends, youtube videos etc.
+
+  %section
+    %h2 Code
+    %code.ruby
+      :preserve
+        if a?.has(":something")?
+          console.log "..."
