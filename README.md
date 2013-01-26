@@ -16,16 +16,14 @@ Compiled to use with middleman pipeline:
 
 Download:
 ```
-git clone THIS my-awesome-presentation
-cd THIS
-git submodule init && git submodule update
+git clone git://github.com/zealot128/middleman-reveal.js-template.git my-awesome-presentation
+cd my-awesome-presentation
 ```
 
 Bootstrap:
 
 ```
 bundle
-rake copy_assets
 middleman
 ```
 
