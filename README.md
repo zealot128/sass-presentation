@@ -7,6 +7,7 @@ Compiled to use with middleman pipeline:
 * Sass
 * Coffeescript
 * reveal.js ready to use
+* Syntax HL with google prettify
 
 
 
@@ -17,15 +18,15 @@ Download:
 ```
 git clone THIS my-awesome-presentation
 cd THIS
-rm -rf .git
-git init
+git submodule init && git submodule update
 ```
 
 Bootstrap:
 
 ```
 bundle
-middleman watch
+rake copy_assets
+middleman
 ```
 
 ``middleman build`` for static site built.

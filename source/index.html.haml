@@ -6,7 +6,7 @@
   %p
     = image_tag "image.gif"
     %br
-    = File.mtime(__FILE__)
+    = File.mtime(__FILE__).strftime("%d.%m.%Y")
 
 %section
   %section
@@ -19,6 +19,8 @@
   %section
     %h2 Code
     %code.ruby
-      :preserve
-        if a?.has(":something")?
-          console.log "..."
+    %pre.prettyprint.lang-ruby
+      %code.lang-ruby
+        :preserve
+          if a?.has(":something")?
+            console.log "..."
