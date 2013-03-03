@@ -1,26 +1,124 @@
 %section#intro
-  = image_tag "logo.png"
 
-  %h3 Headline
+  %h2 Warum?
+  CSS:
+  %ul
+    %li
+      %strike Variablen
+      %strike Mathematik
+      %strike Modularität und Wiederverwendbarkeit
+  %section
+    %h2 Sass
+    %ul
+      %li Variablen
+      %li Mathematik
+      %li Funktionen
 
-  %p
-    = image_tag "image.gif"
-    %br
-    = File.mtime(__FILE__).strftime("%d.%m.%Y")
+%section#features
+  %h2 Features
+  TODO
+  %section
+    %h3 Nesting
+  %section
+    %h3 Variablen
+  %section
+    %h3 Mathematik
+    %h3 Stdlib hue saturation lightness red green blue alpha
+  %section
+    %h3 Mixins
+  %section
+    %h3 Import
+  %section
+    %h3 Bedingungen &amp; Schleifen
+
+
+%section#wdcm
+  %h2 Installation
+
+  %section
+    %h3 1. Kommandozeile mittels Ruby
+    %pre
+      %code
+        gem install sass
+        sass --watch main.scss
+  %secion
+    %h3 2. Apps
+    %p ScoutApp, CodeKit, LiveReload...
+    %iframe(src="http://mhs.github.com/scout-app/" width=800 height=600 border=0)
+
+  %section
+    %h3 3. Integration in built-Tools
+    %ul
+      %li Rails (default seit 3.1)
+      %li
+        Node.js/Express.js
+        %code
+          npm install node-sass
+      %li Module für gängige Frameworks
+      %li
+        = link_to "Sass for Wordpress", "https://github.com/roytomeij/sass-for-wordpress/"
+      %li
+        Compass mit jedem anderen Projekt
+
+  %section
+    %h2 sass-convert
+    = link_to "http://css2sass.heroku.com/", "http://css2sass.heroku.com/"
+
+%section#rails
+  %h2 Rails
+
+  %section
+    %pre.prettyprint.lang-css
+      %code.css
+        :preserve
+          @import "subdir/*";
+          @import "subdir/**/*";
+
+%section#compass
+  %h2 Compass
+
+  "Standard Library" for Sass
+
+  %section
+    TODO Verzeichnisstruktur
+
+  %section
+    %h3 Sprites
+    TODO Sprite beispiel
+  %section
+    %h3 Browser Hacks, Clearfixes, Resets, inline Lists, CSS3-Crossbrowser
+    TODO Beispiel
+  %section
+    %iframe(src="http://compass.aether.ru/" height=800 width=600 style="border: 0")
+%section
+  %h2 Scss vs Sass
+  TODO Gegenueberstellung
 
 %section
+  %h2 Alternativen
+  Less, Stylus
+
+  %p
+    = link_to "http://css-tricks.com/sass-vs-less/", "http://css-tricks.com/sass-vs-less/"
+
+  %blockquote
+    = link_to "Why I switched from LESS to Sass", "http://hugogiraudel.com/2012/11/13/less-to-sass/"
   %section
-    %blockquote
-      Quotes
+    %ul
+      %li + leichteres Setup (js direkt im Browser)
+      %li - IF/Loops nervig
+      %li + Twitter-Bootstrap
+      %li +/- Choose your weapon
+  %section
+    TODO
+    EXAMPLE CODE
+
 
   %section
-    its html, so try embedding iframes, google trends, youtube videos etc.
-
-  %section
-    %h2 Code
-    %code.ruby
-    %pre.prettyprint.lang-ruby
-      %code.lang-ruby
-        :preserve
-          if a?.has(":something")?
-            console.log "..."
+    %h2 Ressourcen
+    %ul
+      %li=link_to "http://sassmeister.com/", "http://sassmeister.com/"
+      %li=link_to  "http://compass-style.org/", "http://compass-style.org/"
+      %li=link_to "http://sass-lang.com/", "http://sass-lang.com/"
+      %li=link_to "http://thesassway.com/guides", "http://thesassway.com/guides"
+      %li=link_to "Getting started with Sass and Compass", "http://thesassway.com/beginner/getting-started-with-sass-and-compass"
