@@ -47,6 +47,61 @@ Haml::Template.options[:ugly] = true
 #     "Helping"
 #   end
 # end
+helpers do
+  def exec_cmd(cmd, text)
+    require "open3"
+    result = nil, error =nil
+    Open3.popen3(cmd) do |stdin,stdout,stderr,wait|
+      stdin.puts text
+      stdin.close
+      result = stdout.read
+      error = stderr.read
+    end
+    if error.present?
+      p error
+      raise Exception.new(error)
+    end
+    result
+  end
+  def iframe(url, style="")
+    "<iframe src='#{url}' width='800' height='600' border='0' style='#{style}'></iframe>"
+  end
+
+  def fragment_cache(ident, &block)
+    require "digest"
+    filename = ".cache/" + Digest::MD5.hexdigest(ident) + ".txt"
+    if File.exists? filename
+      return IO.read(filename)
+    end
+    result = yield
+    FileUtils.mkdir_p(".cache")
+    File.open(filename,"w+") {|f| f.write(result)}
+    result
+  end
+
+  def pygmentize(lexer,text=nil,&block)
+    if block_given?
+      text = capture_haml do
+        yield
+      end
+    end
+    fragment_cache text do
+      exec_cmd("pygmentize -f html -l #{lexer}", text).gsub '<pre>    <span', "<pre><span"
+    end
+  end
+
+  def scss_and_css(style="expanded",&block)
+    text = capture_haml do
+      yield
+    end
+    fragment_cache text do
+      css = exec_cmd("scss -t #{style}", text)
+      scss = pygmentize("scss",text).strip
+      css = pygmentize("css",css).strip
+      "<div class='scss'>Scss #{scss} </div><div class='css'>Css #{css} </div>"
+    end
+  end
+end
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'

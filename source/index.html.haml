@@ -1,98 +1,282 @@
+%section
+  %h1
+    Sass
+  %p Syntactically Awesome Stylesheets
+  = image_tag "http://sass-lang.com/images/sass.gif", alt: "Sass Logo"
 %section#intro
-
-  %h2 Warum?
-  CSS:
-  %ul
-    %li
-      %strike Variablen
-      %strike Mathematik
-      %strike Modularität und Wiederverwendbarkeit
   %section
-    %h2 Sass
+    %h2 Warum?
+  %section
+    = image_tag "http://bethesignal.org/wp-content/uploads/2009/06/css-is-awesome-700x375.jpg"
+    %p CSS:
     %ul
-      %li Variablen
-      %li Mathematik
-      %li Funktionen
+      %li
+        %strike Variablen
+      %li
+        %strike Mathematik
+      %li
+        %strike Import
+      %li Vendor-Prefixes
 
 %section#features
-  %h2 Features
-  TODO
+  %section
+    %h1 Features
   %section
     %h3 Nesting
+    = scss_and_css do
+      :plain
+        article {
+          margin: 10px;
+          a {
+            color: #858;
+          }
+        }
+  %section
+    %h3 Nesting &dash; Advanced '&amp;'
+    = scss_and_css do
+      :plain
+        a.cool {
+          color: #555;
+          &:hover, &:active {
+            text-decoration: underline;
+          }
+          .no-cssgradients & {
+            color: auto;
+          }
+        }
+  /Modernizr
+
   %section
     %h3 Variablen
+    = scss_and_css do
+      :plain
+        $primary-color: red;
+        $contrast-color: adjust-hue($primary-color, 180);
+
+        p {
+          color: $primary-color;
+          background: $contrast-color;
+        }
   %section
-    %h3 Mathematik
-    %h3 Stdlib hue saturation lightness red green blue alpha
+    %h3 Abstände
+    = scss_and_css do
+      :plain
+        $width: 800px;
+        $margin: 20px;
+        $real-width: $width - 2 * $margin;
+
+        .container {
+          width: $real-width;
+          margin: $margin;
+          .half {
+            width: $real-width / 2;
+          }
+        }
+  %section
+    %h3 Funktionen
+    = scss_and_css do
+      :plain
+        $main: #666;
+        $darker: darken($main, 10%);
+        $lighter: lighten($main, 10%);
+
+        h1 { color: $main; }
+        h2 { color: $darker; }
+        h3 { color: $lighter; }
+  %section
+    = iframe "http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html", "background: white; transform: scale(1.2); transform-origin: center"
+
   %section
     %h3 Mixins
+    = scss_and_css do
+      :plain
+        @mixin border-radius( $amount) {
+          border-radius: $amount ;
+          -webkit-border-radius: $amount ;
+          -moz-border-radius: $amount ;
+        }
+        article {
+          @include border-radius(5px)
+        }
+  %section
+    - name = '#{$name}'
+    = scss_and_css do
+      :plain
+        @mixin vendor-prefix($name, $argument) {
+          #{name}: $argument;
+          -webkit-#{name}: $argument;
+          -ms-#{name}: $argument;
+          -moz-#{name}: $argument;
+          -o-#{name}: $argument;
+        }
+
+        p {
+          @include vendor-prefix(hyphens, auto);
+          @include vendor-prefix(border-radius, 5px);
+        }
+  %section
+    %h2 Schleifen
+    = scss_and_css "compact" do
+      :plain
+        @for $i from 1 through 12 {
+          .tile\#{$i} {
+            width: $i * 77px;
+            height: $i * 77px;
+          }
+        }
+  %section
+
+    = scss_and_css do
+      :plain
+        @mixin hyphens($value: "manual") {
+          @each $prefix in -webkit-, -moz-, -o-, "" {
+            #{'#{$prefix}'}hyphens: $value;
+          }
+        }
+        p {
+          text-align: justify;
+          @include hyphens(auto);
+        }
+
+  %section
+    %h2 Bedingungen
+    = scss_and_css do
+      :plain
+        @mixin button($color) {
+          background: $color;
+          @if lightness($color) > 50 {
+            color: black;
+          } @else {
+            color: white;
+          }
+        }
+
+        a.button { @include button(#444) }
+        a.button2 { @include button(#999) }
+
+
   %section
     %h3 Import
+    = pygmentize "scss" do
+      :plain
+        @import "core";
+        @import "typography" , "grid";
+        @import "styles/*";
+        @import "**/*;"
+    = image_tag "import.png"
   %section
-    %h3 Bedingungen &amp; Schleifen
-
+    %h3 Nested import
+    = pygmentize "scss" do
+      :plain
+        @media screen and (min-width: 320px) {
+          @import "phone";
+        }
+        body.user {
+          @import "user";
+        }
 
 %section#wdcm
-  %h2 Installation
+  %section
+    %h1 Installation
 
   %section
     %h3 1. Kommandozeile mittels Ruby
-    %pre
-      %code
-        gem install sass
-        sass --watch main.scss
-  %secion
+    .highlight
+      %pre
+        :plain
+          gem install sass
+- __END__
+  %section
     %h3 2. Apps
-    %p ScoutApp, CodeKit, LiveReload...
-    %iframe(src="http://mhs.github.com/scout-app/" width=800 height=600 border=0)
+    %p ScoutApp (Win, Mac), CodeKit (Mac), LiveReload (Mac)...
+    = iframe "http://mhs.github.com/scout-app/"
 
   %section
-    %h3 3. Integration in built-Tools
+    %h3 3. Integration in Build-Tools
     %ul
       %li Rails (default seit 3.1)
       %li
-        Node.js/Express.js
-        %code
-          npm install node-sass
-      %li Module für gängige Frameworks
+        = link_to "Node.js/Express.js", "https://npmjs.org/package/node-sass"
       %li
-        = link_to "Sass for Wordpress", "https://github.com/roytomeij/sass-for-wordpress/"
+        Module für gängige Frameworks
+        = link_to "Drupal", "http://drupal.org/project/sass"
+        = link_to "Wordpress", "https://github.com/roytomeij/sass-for-wordpress/"
+        = link_to "Typo3", "http://typo3.org/extension-manuals/sassify/1.2.2/view/"
       %li
-        Compass mit jedem anderen Projekt
+        %strong
+          Compass mit jedem anderen Projekt
+
 
   %section
     %h2 sass-convert
     = link_to "http://css2sass.heroku.com/", "http://css2sass.heroku.com/"
 
 %section#rails
-  %h2 Rails
+  %section
+  %h1 Rails
 
   %section
-    %pre.prettyprint.lang-css
-      %code.css
-        :preserve
-          @import "subdir/*";
-          @import "subdir/**/*";
+    %ul
+      %li image-url
+      %li precompile files
+      %li compass
 
 %section#compass
-  %h2 Compass
-
-  "Standard Library" for Sass
+  %section
+    %h1 Compass
+    "Standard Library" for Sass
+    %ul
+      %li CSS3
+      %li Sprites
+      %li Utilities
 
   %section
-    TODO Verzeichnisstruktur
+    %h3 Installation
 
+    %pre
+      gem install compass
+      compass create myproject
+    = image_tag "compass.png"
+  %section
+    %h3 CSS3
   %section
     %h3 Sprites
-    TODO Sprite beispiel
+  %section
+    %h3 Utilities
+    %ul
+      %li Clearfix
+      %li Inline-List
+      %li Hacks (z.B. min-width)
+      %li Reset
+
   %section
     %h3 Browser Hacks, Clearfixes, Resets, inline Lists, CSS3-Crossbrowser
     TODO Beispiel
   %section
-    %iframe(src="http://compass.aether.ru/" height=800 width=600 style="border: 0")
+    = iframe "http://compass.aether.ru/"
 %section
-  %h2 Scss vs Sass
-  TODO Gegenueberstellung
+  %section
+    %h2 Scss vs Sass
+  %section
+    %h3 Scss
+    = pygmentize "scss" do
+      :plain
+        article {
+          margin-bottom: 2em;
+          .entry-content {
+            border-top: 1px solid #eee;
+            @include box-shadow(2px, black)
+          }
+        }
+    %h3 Sass
+    = pygmentize "sass" do
+      :plain
+        article
+          margin-bottom: 2em
+          .entry-content
+            border-top: 1px solid #eee
+            +box-shadow(2px, black)
+
 
 %section
   %h2 Alternativen
@@ -113,6 +297,9 @@
     TODO
     EXAMPLE CODE
 
+%section
+  %section
+    = image_tag "http://maddesigns.de/wp-content/uploads/2011/12/css_sass_compass.jpg"
 
   %section
     %h2 Ressourcen
@@ -122,3 +309,4 @@
       %li=link_to "http://sass-lang.com/", "http://sass-lang.com/"
       %li=link_to "http://thesassway.com/guides", "http://thesassway.com/guides"
       %li=link_to "Getting started with Sass and Compass", "http://thesassway.com/beginner/getting-started-with-sass-and-compass"
+
