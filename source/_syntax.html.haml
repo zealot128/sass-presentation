@@ -1,0 +1,156 @@
+%section#features
+  %section
+    %h1 Features
+  %section
+    %h3 Nesting
+    = scss_and_css do
+      :plain
+        article {
+          margin: 10px;
+          a {
+            color: #858;
+          }
+        }
+  %section
+    %h3 Nesting &dash; Advanced '&amp;'
+    = scss_and_css do
+      :plain
+        a.cool {
+          color: #555;
+          &:hover, &:active {
+            text-decoration: underline;
+          }
+          .no-cssgradients & {
+            color: auto;
+          }
+        }
+  /Modernizr
+
+  %section
+    %h3 Variablen
+    = scss_and_css do
+      :plain
+        $primary-color: red;
+        $contrast-color: adjust-hue($primary-color, 180);
+
+        p {
+          color: $primary-color;
+          background: $contrast-color;
+        }
+  %section
+    %h3 Abstände
+    = scss_and_css do
+      :plain
+        $width: 800px;
+        $margin: 20px;
+        $real-width: $width - 2 * $margin;
+
+        .container {
+          width: $real-width;
+          margin: $margin;
+          .half {
+            width: $real-width / 2;
+          }
+        }
+  %section
+    %h3 Funktionen
+    = scss_and_css do
+      :plain
+        $main: #666;
+        $darker: darken($main, 10%);
+        $lighter: lighten($main, 10%);
+
+        h1 { color: $main; }
+        h2 { color: $darker; }
+        h3 { color: $lighter; }
+  %section
+    = iframe "http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html", "background: white; transform: scale(1.2); transform-origin: center"
+
+  %section
+    %h3 Mixins
+    = scss_and_css do
+      :plain
+        @mixin border-radius( $amount) {
+          border-radius: $amount ;
+          -webkit-border-radius: $amount ;
+          -moz-border-radius: $amount ;
+        }
+        article {
+          @include border-radius(5px)
+        }
+  %section
+    - name = '#{$name}'
+    = scss_and_css do
+      :plain
+        @mixin vendor-prefix($name, $argument) {
+          #{name}: $argument;
+          -webkit-#{name}: $argument;
+          -ms-#{name}: $argument;
+          -moz-#{name}: $argument;
+          -o-#{name}: $argument;
+        }
+
+        p {
+          @include vendor-prefix(hyphens, auto);
+          @include vendor-prefix(border-radius, 5px);
+        }
+  %section
+    %h2 Schleifen
+    = scss_and_css "compact" do
+      :plain
+        @for $i from 1 through 12 {
+          .tile\#{$i} {
+            width: $i * 77px;
+            height: $i * 77px;
+          }
+        }
+  %section
+
+    = scss_and_css do
+      :plain
+        @mixin hyphens($value: "manual") {
+          @each $prefix in -webkit-, -moz-, -o-, "" {
+            #{'#{$prefix}'}hyphens: $value;
+          }
+        }
+        p {
+          text-align: justify;
+          @include hyphens(auto);
+        }
+
+  %section
+    %h2 Bedingungen
+    = scss_and_css do
+      :plain
+        @mixin button($color) {
+          background: $color;
+          @if lightness($color) > 50 {
+            color: black;
+          } @else {
+            color: white;
+          }
+        }
+
+        a.button { @include button(#444) }
+        a.button2 { @include button(#999) }
+
+
+  %section
+    %h3 Import
+    = pygmentize "scss" do
+      :plain
+        @import "core";
+        @import "typography" , "grid";
+        @import "styles/*";
+        @import "**/*;"
+    = image_tag "import.png"
+  %section
+    %h3 Nested import
+    = pygmentize "scss" do
+      :plain
+        @media screen and (min-width: 320px) {
+          @import "phone";
+        }
+        body.user {
+          @import "user";
+        }

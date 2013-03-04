@@ -1,0 +1,77 @@
+%section#wdcm
+  %section
+    %h1 Installation
+
+  %section
+    %h3 1. Kommandozeile mittels Ruby
+    .highlight
+      %pre
+        :preserve
+          $ gem install sass
+          $ sass --watch screen.scss
+
+          >>> Sass is watching for changes. Press Ctrl-C to stop
+          >>> Change detected to: ./screen.scss
+          overwrite ./screen.css
+  %section
+    %h3 2. Apps
+    %ul
+
+      %li
+        = link_to "ScoutApp (Win, Mac, free)", "http://mhs.github.com/scout-app/"
+        .small
+          Compass, Sass
+      %li
+        = link_to "CodeKit (Mac, $25)", "http://incident57.com/codekit/"
+        .small
+          Less, Sass, Stylus, Jade, Haml, Slim, CoffeeScript, Javascript and Compass
+      %li
+        = link_to "Fire.app (Win, Mac, Linux $14)", "http://fireapp.handlino.com/"
+        .small
+          CoffeeScript, Sass, Compass, Haml, Slim, Markdown
+      %li
+        = link_to "Compass.app (Mac $10)", "http://compass.handlino.com/"
+        .small
+          Compass, Sass, Webserver, Livereload
+      %li
+        = link_to "LiveReload (Mac $9.99, Win alpha)", "http://livereload.com/"
+        .small
+          LESS, SASS, Compass, Stylus, CoffeeScript, IcedCoffeeScript, Eco, SLIM, HAML, Jade
+  %section
+    %h3 3. Integration in Build-Tools
+    %ul
+      %li Rails (default seit 3.1)
+      %li
+        = link_to "Node.js/Express.js", "https://npmjs.org/package/node-sass"
+      %li
+        Module für gängige Frameworks
+        = link_to "Drupal", "http://drupal.org/project/sass"
+        = link_to "Wordpress", "https://github.com/roytomeij/sass-for-wordpress/"
+        = link_to "Typo3", "http://typo3.org/extension-manuals/sassify/1.2.2/view/"
+      %li Middleman, Yeoman
+      %li
+        %strong
+          Compass mit jedem anderen Projekt
+
+
+  %section
+    %h2 sass-convert
+    = link_to "http://css2sass.heroku.com/", "http://css2sass.heroku.com/"
+
+    = pygmentize "css" do
+      :plain
+        .highlight { background: #2B2B2B}
+        .highlight .hll { background-color: #ffffcc }
+        .highlight .c { color: #BC9458}
+    %h2 &darr;
+    = pygmentize "scss" do
+      :plain
+        .highlight {
+          background: #2B2B2B;
+          .hll {
+            background-color: #ffffcc;
+          }
+          .c {
+            color: #BC9458;
+          }
+        }

@@ -1,0 +1,123 @@
+%section#compass
+  %section
+    %h1 Compass
+    "Standard Library" for Sass
+    %ul
+      %li CSS3
+      %li Sprites
+      %li Utilities
+
+  %section
+    %h3 Installation
+
+    .highlight
+      %pre
+        :preserve
+          gem install compass
+          compass create myproject
+          compass watch
+    = image_tag "compass.png"
+  %section
+    %h3 config.rb
+
+    = pygmentize "ruby" do
+      :plain
+        http_path = "/"
+        css_dir = "stylesheets"
+        sass_dir = "sass"
+        images_dir = "images"
+        javascripts_dir = "javascripts"
+
+        output_style = :expanded  # or :nested or :compact or :compressed
+        line_comments = false
+
+        # Plugins!
+        require 'ninesixty'
+        require 'susy'
+
+
+
+  %section
+    %h3 CSS3
+    = scss_and_css do
+      :plain
+        @import "compass/css3/transform";
+        @import "compass/css3/images";
+        a {
+          @include transform( scale(1.2) );
+          @include background-image(linear-gradient(left top, white, #dddddd));
+        }
+  %section
+    %h3 Sprites
+    = image_tag "sprite.png", style: "background: white"
+    %p Weil:
+    %ul
+      %li Ladezeit/Serverload
+      %li Image hover Wechsel ohne Unterbrechung
+  %section
+    = scss_and_css :compact do
+      :plain
+        @import "compass";
+        @import "icons/*.png";
+        @include all-icons-sprites;
+  %section
+    %h3 Utilities
+    %ul
+      %li Clearfix
+      %li Inline-List
+      %li Hacks (z.B. min-width)
+      %li Reset
+      %li
+        CSS-Validator
+        %pre.small
+          compass validate .
+      %li
+        Tonnen an Funktionen
+        .small
+          = link_to "Referenz", "http://compass.aether.ru/"
+  %section
+    %h3 Extensions
+    %ul
+      %li
+        = link_to "Compass Magick", "https://github.com/StanAngeloff/compass-magick"
+        .small Gradienten-PNGs automatisch generieren
+      %li
+        =link_to "Twitter bootstrap", "https://github.com/hecbuma/compass-bootstrap"
+        u.v.m.
+        .small 960.gs, Grid Coordinates, GraphPaper, Baseline, Less Framework 4, 52 Framework, Twitter Bootstrap, Foundation, Stitch, Susy, Salsa, Blankwork, Adaptive Grid, HTML5 Boilerplate
+
+      %li
+        =link_to "Sassy Buttons", "http://jaredhardy.com/sassy-buttons/"
+        .small easy CSS3 buttons
+    %blockquote.small
+      = link_to "github.com/chriseppstein/compass/wiki/Compass-Plugins", "https://github.com/chriseppstein/compass/wiki/Compass-Plugins"
+  %section(data-state="alert")
+    = image_tag "http://maddesigns.de/wp-content/uploads/2011/12/css_sass_compass.jpg"
+
+%section
+  %section
+    %h2 Scss vs Sass
+
+    %p Sass:
+    %ul
+      %li kürzere Syntax a la Python, CoffeeScript, HAML
+      %li Geschmacksfrage &rarr; gleichmächtig
+  %section
+    %h3 Scss
+    = pygmentize "scss" do
+      :plain
+        article {
+          margin-bottom: 2em;
+          .entry-content {
+            border-top: 1px solid #eee;
+            @include box-shadow(2px, black)
+          }
+        }
+    %h3 Sass
+    = pygmentize "sass" do
+      :plain
+        article
+          margin-bottom: 2em
+          .entry-content
+            border-top: 1px solid #eee
+            +box-shadow(2px, black)

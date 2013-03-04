@@ -10,7 +10,7 @@
 # compass_config do |config|
 #   config.output_style = :compact
 # end
-Haml::Template.options[:ugly] = true
+# Haml::Template.options[:ugly] = true
 
 ###
 # Page options, layouts, aliases and proxies
@@ -58,7 +58,7 @@ helpers do
       error = stderr.read
     end
     if error.present?
-      p error
+      puts error
       raise Exception.new(error)
     end
     result
@@ -95,7 +95,7 @@ helpers do
       yield
     end
     fragment_cache text do
-      css = exec_cmd("scss -t #{style}", text)
+      css = exec_cmd("cd source && scss --compass --trace -t #{style}", text)
       scss = pygmentize("scss",text).strip
       css = pygmentize("css",css).strip
       "<div class='scss'>Scss #{scss} </div><div class='css'>Css #{css} </div>"

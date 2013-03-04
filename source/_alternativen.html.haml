@@ -1,0 +1,95 @@
+%section
+  %section
+    %h2 Alternativen
+    Less, <span style='font-size:70%'>Stylus</span>
+
+    %section
+      %p Scss
+      = pygmentize "scss" do
+        :plain
+          @import "other.css";
+          $mainColor: #0982c1;
+          a {
+            img {
+              border-color: $mainColor;
+            }
+          }
+
+      %p Less
+      = pygmentize "scss" do
+        :plain
+          @import "other.css";
+          @mainColor: #0982c1;
+          a {
+            img {
+              border-color: @mainColor;
+            }
+          }
+  %section
+    %ul
+      %li + leichteres Setup (js direkt im Browser)
+      %li - IF/Loops schwieriger
+      %li - kein Compass
+      %li + Twitter-Bootstrap
+      %li +/- Choose your weapon
+  %section
+    %ul
+      %li
+        = link_to "Net.tutsplus - sass vs less vs styles a proprocessor shootout", "http://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/"
+      %li
+        = link_to "Sass vs. LESS | CSS-Tricks", "http://css-tricks.com/sass-vs-less/"
+      %li
+        = link_to "Why I switched from LESS to Sass", "http://hugogiraudel.com/2012/11/13/less-to-sass/"
+
+  %section(data-state="soothe")
+    %h1 Egal welcher Preprocessor
+
+    %ul
+      %li Wesentlich wartbarere Stylesheets dank Imports, Variablen und Nestings
+      %li Programmatisch statt Copy &amp; Paste
+      %li Seit 2009 nicht mehr ohne
+      %li
+        ALLE meine Webprojekte verwenden Sass
+        .small So  auch diese Präsentation
+
+%section
+
+  %section
+    %h2 Ressourcen
+    %ul
+      %li
+        =link_to "http://sassmeister.com/", "http://sassmeister.com/"
+        .small Online "Editor"/Compiler
+      %li
+        =link_to  "http://compass-style.org/", "http://compass-style.org/"
+        .small Offizielle Compass Seite
+      %li
+        =link_to "http://sass-lang.com/", "http://sass-lang.com/"
+        .small Offizielle Sass Seite
+      %li
+        =link_to "http://thesassway.com/guides", "http://thesassway.com/guides"
+        .small Blogs und Guides
+      %li=link_to "Getting started with Sass and Compass", "http://thesassway.com/beginner/getting-started-with-sass-and-compass"
+      %li
+        = link_to "Sass & Compass: The future of stylesheets now", "https://speakerdeck.com/imathis/sass-compass-the-future-of-stylesheets-now"
+        .small Sehr gute Präsentation
+
+  %section
+    %h1 Danke!
+    = image_tag "http://www.gravatar.com/avatar/6edcb304a03a87ddf5c68239f7d001e4?s=200&d=identicon&r=PG"
+    %ul
+      %li
+        = link_to "stefanwienert.net", "http://www.stefanwienert.net"
+        .small Blog
+      %li
+        = link_to "@stefanwienert", "https://twitter.com/stefanwienert"
+        .small Twitter
+      %li
+        = link_to "pludoni GmbH", "http//www.pludoni.de/"
+        .small
+          Webentwickler bei pludoni
+          %br
+          = link_to "ITsax.de - IT Jobs in Dresden und Umgebung", "http://www.itsax.de"
+          %br
+          = link_to "ITmitte.de - IT Jobs in Leipzig, Halle, Jena", "http://www.itmitte.de"
+

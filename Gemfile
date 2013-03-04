@@ -1,5 +1,6 @@
-source "https://rubygems.org"
+source "http://rubygems.org"
 
-gem "middleman", "~>3.0.5"
+gem "haml"
+gem "middleman", git: "git://github.com/middleman/middleman.git"
 gem "pry"
 gem "rake"
