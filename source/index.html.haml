@@ -1,28 +1,46 @@
+- @wdcm = false
 %section(data-state="white")
   %h1
     Sass
   %p Syntactically Awesome Stylesheets
   = image_tag "http://sass-lang.com/images/sass.gif", alt: "Sass Logo"
-  = image_tag "http://wdcmdresden.com/wp-content/themes/default/img/wdcm.png", alt: "WDCM Dresden"
+  - if @wdcm
+    = image_tag "http://wdcmdresden.com/wp-content/themes/default/img/wdcm.png", alt: "WDCM Dresden"
+  - else
+    = image_tag "rubydd-dark.png", alt: "Ruby Dresden", width: 220
 %section#intro
   %section
     %h2 Warum?
   %section
     = image_tag "http://bethesignal.org/wp-content/uploads/2009/06/css-is-awesome-700x375.jpg"
-    %p CSS:
-    %ul
+    %p CSS
+    %ul.fragment
       %li
         %strike Variablen
       %li
         %strike Mathematik
       %li
         %strike Import
-      %li Vendor-Prefixes
+      %li Vendor-Prefixes (-webkit, -moz (-o))
+
+  %section
+    %h2 Sass
+
+    kompiliert Scss &rarr; CSS
+    = image_tag "import.png"
+  %section
+    %ul
+      %li baut auf CSS Syntax auf
+      %li erweitert diese
+      %li
+        %strong Gültige* CSS-Dateien sind auch gültige Scss-Dateien
+        .small Außer einige wenige obskure (IE)-CSS-Hacks
 
 = partial "syntax"
 = partial "tools"
-= partial "rails"
 = partial "compass"
+- if not @wdcm
+  = partial "rails"
 = partial "alternativen"
 
 

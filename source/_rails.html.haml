@@ -4,8 +4,98 @@
 
     seit 3.1. default
   %section
-    %ul
-      %li image-url
-      %li precompile files
-      %li compass
+    %h2 Sass-Rails
 
+    = pygmentize "ruby" do
+      :plain
+        group :assets do
+          gem 'sass-rails',   '~> 3.2.3'
+          gem "compass-rails"
+        end
+  %section
+    %h2 auch Application.css kann weg
+
+    = pygmentize "bash" do
+      :plain
+        rm app/assets/stylesheets/application.css
+        vim app/assets/stylesheets/application.css.scss
+    &rarr;
+    = pygmentize "scss" do
+      :plain
+        @import "jquery_ui";
+        @import "twitter/bootstrap;
+        body.user {
+          @import "user/**/*";
+        }
+
+  %section
+    %h2 Extra-Stylesheets
+    =pygmentize "erb" do
+      :plain
+        # layouts/application.html.erb
+        <% if logged_in? %>
+          <%= stylesheet_include_tag "user" %>
+        <% end %>
+
+    .fragment
+      =pygmentize "ruby" do
+        :plain
+          # config/application.rb
+          config.assets.precompile += [ "user.css" ]
+
+
+  %section
+    %h2 Zugriff auf Bilder/Fonts
+
+    Nur über asset-helper möglich ( <code>config.assets.digest = true</code>)
+
+
+    = pygmentize "scss" do
+      :plain
+        .handle {
+          background: image-url("handle.png");
+        }
+
+    .fragment
+      in Production:
+      = pygmentize "css" do
+        :plain
+          .handle {
+            background-image:url(/assets/handle-e0da531f6d0f44ecd2d6efde3c3fd75d.png)
+          }
+
+
+  %section
+    %h2 Compass-Rails
+
+    funktioniert! Einfach in entsprechenden Stylesheets:
+    = pygmentize "scss" do
+      :plain
+        @import "compass/css3/transform";
+
+
+  %section
+    %h2 Compass Extensions in Rails
+
+    = pygmentize "ruby" do
+      :plain
+        # Gemfile
+        group :assets do
+          gem "sassy-buttons"
+        end
+    .fragment
+      = pygmentize "bash" do
+        :plain
+          bundle exec compass install sassy-buttons
+      = pygmentize "ruby" do
+        :plain
+          # config/application.rb
+          config.compass.require "sassy-buttons"
+  %section
+    %h2 ...Fortsetzung
+    = pygmentize "scss" do
+      :plain
+        @import "sassy-buttons";
+        a.button {
+          @include sassy-button("shiny", 15px, 26px, #ffd71a, #ffaa1a);
+        }

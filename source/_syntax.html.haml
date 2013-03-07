@@ -7,35 +7,57 @@
       :plain
         article {
           margin: 10px;
-          a {
-            color: #858;
+          p {
+            text-align: justify;
+            a.special {
+              color: #855;
+            }
           }
         }
+    .fragment
+      https://speakerdeck.com/jonrohan/githubs-css-performance
   %section
     %h3 Nesting &dash; Advanced '&amp;'
     = scss_and_css do
       :plain
-        a.cool {
+        a.btn {
           color: #555;
           &:hover, &:active {
             text-decoration: underline;
           }
-          .no-cssgradients & {
-            color: auto;
+          &.btn-primary {
+            color: red;
           }
         }
   /Modernizr
+  %section
+    %h3 Kontext!
+    z.B. für modernizr
+    = pygmentize "html" do
+      :plain
+        <html class="js no-touch postmessage history multiplebgs boxshadow opacity cssanimations csscolumns cssgradients csstransforms csstransitions .......">
+    .fragment
+      = scss_and_css do
+        :plain
+          .fancy {
+            background-image: linear-gradient(top center, #555, #888);
+            .no-cssgradients & {
+              background-color: #555;
+            }
+          }
 
   %section
     %h3 Variablen
     = scss_and_css do
       :plain
-        $primary-color: red;
-        $contrast-color: adjust-hue($primary-color, 180);
+        $primary-color: #ff0000;
+        // oder $primary-color: red;
 
-        p {
+        h2 {
           color: $primary-color;
-          background: $contrast-color;
+        }
+        h1 {
+          color: invert($primary-color);
         }
   %section
     %h3 Abstände
@@ -131,8 +153,8 @@
           }
         }
 
-        a.button { @include button(#444) }
-        a.button2 { @include button(#999) }
+        a.button-dark  { @include button(#444) }
+        a.button-light { @include button(#999) }
 
 
   %section
@@ -151,6 +173,18 @@
         @media screen and (min-width: 320px) {
           @import "phone";
         }
-        body.user {
-          @import "user";
+        body.admin {
+          @import "admin";
         }
+    .fragment
+      = scss_and_css do
+        :plain
+          @media screen and (min-width: 320px) {
+            // inhalt von phone.css
+            .sidebar { display: none; }
+          }
+          body.admin {
+            // user.css
+            a.logout { color: blue; }
+          }
+

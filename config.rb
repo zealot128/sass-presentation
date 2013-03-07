@@ -98,7 +98,7 @@ helpers do
       css = exec_cmd("cd source && scss --compass --trace -t #{style}", text)
       scss = pygmentize("scss",text).strip
       css = pygmentize("css",css).strip
-      "<div class='scss'>Scss #{scss} </div><div class='css'>Css #{css} </div>"
+      "<div class='scss'>Scss #{scss} </div><div class='css fragment'>Css #{css} </div>"
     end
   end
 end

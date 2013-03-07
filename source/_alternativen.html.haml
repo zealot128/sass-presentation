@@ -3,7 +3,7 @@
     %h2 Alternativen
     Less, <span style='font-size:70%'>Stylus</span>
 
-    %section
+    .fragment
       %p Scss
       = pygmentize "scss" do
         :plain
@@ -28,14 +28,19 @@
   %section
     %ul
       %li + leichteres Setup (js direkt im Browser)
-      %li - IF/Loops schwieriger
+      %li
+        \- IF/Loops schwieriger
+        %ul
+          %li Schleifen NUR mit Rekursion!
+          %li Statt Bedinungen, Guard-Statements
       %li - kein Compass
       %li + Twitter-Bootstrap
-      %li +/- Choose your weapon
+
   %section
+    %h2 Meinungen sind wie ...,
     %ul
       %li
-        = link_to "Net.tutsplus - sass vs less vs styles a proprocessor shootout", "http://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/"
+        = link_to "Net.tutsplus - sass vs less vs stylus a preprocessor shootout", "http://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/"
       %li
         = link_to "Sass vs. LESS | CSS-Tricks", "http://css-tricks.com/sass-vs-less/"
       %li
@@ -73,9 +78,22 @@
       %li
         = link_to "Sass & Compass: The future of stylesheets now", "https://speakerdeck.com/imathis/sass-compass-the-future-of-stylesheets-now"
         .small Sehr gute Präsentation
-
   %section
+    %h2 Libsass und sassc
+
+    %p Rewrite in C
+    %ul
+      %li
+        = link_to "hcatlin/sassc", "https://github.com/hcatlin/sassc"
+      %li
+        = link_to "hcatlin/libsass", "https://github.com/hcatlin/libsass"
+      %li It's fast, man!
+
+  %section(data-state="white")
     %h1 Danke!
+    %p.small
+      powered by
+      = link_to "Reveal.js",""
     = image_tag "http://www.gravatar.com/avatar/6edcb304a03a87ddf5c68239f7d001e4?s=200&d=identicon&r=PG"
     %ul
       %li
@@ -92,4 +110,5 @@
           = link_to "ITsax.de - IT Jobs in Dresden und Umgebung", "http://www.itsax.de"
           %br
           = link_to "ITmitte.de - IT Jobs in Leipzig, Halle, Jena", "http://www.itmitte.de"
+
 
